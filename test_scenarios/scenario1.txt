@@ -1,0 +1,8 @@
+Road(R1,R2,R3,R4)
+Road(R2,R3,R4,R1)
+Road(R3,R4,R1,R2)
+Road(R4,R1,R2,R3)
+
+Driver(Blue Truck,R1,R3,false)
+Driver(Red Car,R2,R3,false)
+Driver(Blue Bike,R4,R2,false)
