@@ -6,10 +6,14 @@ class Crossroad(Environment):
         roads=[thing for thing in self.things if isinstance(thing,Road)]
         for road in roads:
             result= result + str(road)+'\n'
-        result=result + '\nAgents:\n'
+        result=result + '\nAgents:'
         agents=[thing for thing in self.things if isinstance(thing,Agent)]
         for agent in agents:
             result= result + str(agent) + '\n'
+        signs=[thing for thing in self.things if isinstance(thing,Sign)]
+        result=result + '\nSigns:'
+        for sign in signs:
+            result= result + str(sign) + '\n'
         return result
 
     # Returns the road the road with the given name if it exists
@@ -28,7 +32,7 @@ class Crossroad(Environment):
     def percept(self,agent):
         other_agents=[thing for thing in self.things if (isinstance(thing,Agent) and thing!= agent)]
         roads=[thing for thing in self.things if isinstance(thing,Road)]
-        signs=[]
+        signs=[thing for thing in self.things if isinstance(thing,Sign) and thing.road==agent.current_road]
         return agent,other_agents,roads,signs
 
     # If an agent takes the 'go' action it will become inactive
@@ -75,8 +79,17 @@ class Road(Thing):
         result= result + 'Right side:'+str(self.right)+'\n'
         return result
 
-# the class that i will use to represent a traffic sign
+# The class that i will use to represent a traffic sign
+# A sign can have the following names:
+# priority_road, priority_road_left, priority_road_right 
+# In this case left/right is the direction where the priority road is going
+# stop, stop_left, stop_right
+# The yield sign can be considered the same as the stop one since it has the same effect in our situation
+# In this case left/right is the dirrection of the other road that has a similar sign(yield or stop)
 class Sign(Thing):
     def __init__(self,name,road):
         self.name=name
         self.road=road
+
+    def __str__(self):
+        return self.name+ ' on '+ self.road
