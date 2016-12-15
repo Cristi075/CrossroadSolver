@@ -144,7 +144,7 @@ def check(env):
 		sign_road=next(road for road in roads if road.name == sign.road)
 
 		if sign.name=='priority_road':
-			if sign_road.forward == None:
+			if sign_road.forward == []:
 				print('ERROR: A priority_road sign is placed on a road with no forward connection')
 				return False
 			else:
@@ -158,7 +158,7 @@ def check(env):
 					print('Expected a priority_road sign on '+str(sign_road.forward))
 					return False
 		elif sign.name=='priority_road_right':
-			if sign_road.right == None:
+			if sign_road.right == []:
 				print('ERROR: A priority_road_right sign is placed on a road with no right connection')
 				return False
 			else:
@@ -172,7 +172,7 @@ def check(env):
 					print('Expected a priority_road_left sign on '+str(sign_road.right))
 					return False
 		elif sign.name=='priority_road_left':
-			if sign_road.left == None:
+			if sign_road.left == []:
 				print('ERROR: A priority_road_left sign is placed on a road with no left connection')
 				return False
 			else:
