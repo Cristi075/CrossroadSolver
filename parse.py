@@ -50,7 +50,6 @@ def parse(inputFile,outputFile):
 			name=resSign.group(1)
 			road=resSign.group(2)
 			env.add_thing(Sign(name,road))
-			print(Sign(name,road))
 		else:
 			if(line.strip()!=''):
 				print('The following line did not match any of the existing patterns:')
