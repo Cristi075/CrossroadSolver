@@ -1,5 +1,9 @@
 from aima.agents import *
 
+priority_signs  = [ 'priority_road', 'priority_road_left', 'priority_road_right']
+stop_signs      = [ 'stop', 'stop_left', 'stop_right' ]
+valid_signs     = priority_signs + stop_signs
+
 class Crossroad(Environment):
     def __str__(self):
         result='Roads:\n'
@@ -32,7 +36,7 @@ class Crossroad(Environment):
     def percept(self,agent):
         other_agents=[thing for thing in self.things if (isinstance(thing,Agent) and thing!= agent)]
         roads=[thing for thing in self.things if isinstance(thing,Road)]
-        signs=[thing for thing in self.things if isinstance(thing,Sign) and thing.road==agent.current_road]
+        signs=[thing for thing in self.things if isinstance(thing,Sign)]
         return agent,other_agents,roads,signs
 
     # If an agent takes the 'go' action it will become inactive

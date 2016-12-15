@@ -2,10 +2,6 @@ from common import *
 from programs import program0
 import jsonpickle
 
-priority_signs	= [	'priority_road', 'priority_road_left', 'priority_road_right']
-stop_signs		= [ 'stop', 'stop_left', 'stop_right' ]
-valid_signs		= priority_signs + stop_signs
-
 min_roads=2
 max_roads=4
 
