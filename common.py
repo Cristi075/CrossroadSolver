@@ -6,12 +6,12 @@ class Crossroad(Environment):
         roads=[thing for thing in self.things if isinstance(thing,Road)]
         for road in roads:
             result= result + str(road)+'\n'
-        result=result + '\nAgents:'
+        result=result + '\nAgents:\n'
         agents=[thing for thing in self.things if isinstance(thing,Agent)]
         for agent in agents:
             result= result + str(agent) + '\n'
         signs=[thing for thing in self.things if isinstance(thing,Sign)]
-        result=result + '\nSigns:'
+        result=result + '\nSigns:\n'
         for sign in signs:
             result= result + str(sign) + '\n'
         return result
