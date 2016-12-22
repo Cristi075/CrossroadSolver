@@ -13,9 +13,9 @@ def program0(percepts):
     emergency_agents=[agent for agent in agents if (agent.emergency and agent.alive)]
 
     nr_active_agents= len([agent for agent in agents if agent.alive])+1
-    if(myself.memory == nr_active_agents):
+    if(myself.memory['active_agents'] == nr_active_agents):
         print(myself.name + ': Deadlock situation detected')
-    myself.memory = nr_active_agents
+    myself.memory['active_agents'] = nr_active_agents
 
     # If my vehicle is an emergency one i should go without waiting
     # TODO: What happens if we have more than one emergency vehicle

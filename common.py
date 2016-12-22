@@ -5,6 +5,9 @@ stop_signs      = [ 'stop', 'stop_left', 'stop_right' ]
 valid_signs     = priority_signs + stop_signs
 
 class Crossroad(Environment):
+    def __init__(self):
+        super().__init__()
+
     def __str__(self):
         result='Roads:\n'
         roads=[thing for thing in self.things if isinstance(thing,Road)]
@@ -60,8 +63,8 @@ class Driver(Agent):
         self.destination_road=destination_road
         self.emergency=emergency
         # The memory variable will be used to allow the agents to store information between turns
-        # TODO: Turn it into something that allows the world to be modeled 
-        self.memory=0
+        self.memory={} # An empty dictionary. This is going to be used to store data in a key-value manner
+        self.memory['active_agents']=0 # The number of active agents from the last turn
 
     def __str__(self):
         result='Name: '+self.name + '\n'
