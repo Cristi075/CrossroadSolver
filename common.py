@@ -59,6 +59,9 @@ class Driver(Agent):
         self.current_road=current_road
         self.destination_road=destination_road
         self.emergency=emergency
+        # The memory variable will be used to allow the agents to store information between turns
+        # TODO: Turn it into something that allows the world to be modeled 
+        self.memory=0
 
     def __str__(self):
         result='Name: '+self.name + '\n'
