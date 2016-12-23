@@ -61,7 +61,7 @@ class Crossroad(Environment):
             print('ERROR: Illegal action '+action)
 
 class Driver(Agent):
-    def __init__(self,program,name,current_road,destination_road,emergency=False):
+    def __init__(self,program,name,current_road,destination_road,emergency=False,yieldChance=0.8):
         super().__init__(program)
         self.alive=True
         self.name=name
@@ -71,12 +71,14 @@ class Driver(Agent):
         # The memory variable will be used to allow the agents to store information between turns
         self.memory={} # An empty dictionary. This is going to be used to store data in a key-value manner
         self.memory['active_agents']=0 # The number of active agents from the last turn
+        self.yieldChance=yieldChance
 
     def __str__(self):
         result='Name: '+self.name + '\n'
         result=result + 'Current road: '+self.current_road + '\n'
         result=result + 'Destination road:'+self.destination_road + '\n'
         result=result + 'Active:'+ str(self.alive) + '\n'
+        result=result + 'YieldChance:' + str(self.yieldChance) + '\n'
         if self.emergency:
             result=result+'Emergency vehicle'
         return result
