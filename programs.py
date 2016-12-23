@@ -1,4 +1,13 @@
 from common import valid_signs
+import random
+
+def getDecision(myself):
+    if(random.uniform(0, 1) < myself.yieldChance):
+        print(myself.name+": yield")
+        return 'yield'
+    else:
+        print(myself.name+": try")
+        return 'try'
 
 def program0(percepts):
     myself      =percepts[0]
@@ -15,7 +24,25 @@ def program0(percepts):
 
     nr_active_agents= len([agent for agent in agents if agent.alive])+1
     if(myself.memory['active_agents'] == nr_active_agents):
-        print(myself.name + ': Deadlock situation detected')
+        # Deadlock situation detected. It the agents is in this case it should start negotiating with the other agents
+        #print(messages)
+        if(messages=={}):
+            # This is the first turn after the deadlock was detected
+            return getDecision(myself)            
+        else:
+            other_messages=[messages[agent.name] for agent in agents if agent.name in messages.keys()]
+            if(myself.name in messages.keys()): # This agent sent a message last turn
+                if(messages[myself.name]=='yield'):
+                    if 'try' not in other_messages: # No agent sent a try message. We're trying again
+                        return getDecision(myself)
+                    else:
+                        return 'yield'
+                elif(messages[myself.name]=='try'):
+                    if 'try' not in other_messages: # No other agent sent a try message. 
+                        return 'go' # This agent is the only one who sent a try message
+                    else:
+                        return getDecision(myself)
+
     myself.memory['active_agents'] = nr_active_agents
 
     # If my vehicle is an emergency one i should go without waiting
