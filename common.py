@@ -53,8 +53,8 @@ class Crossroad(Environment):
             print (agent.name + ' is waiting')
         elif action is 'yield':
             self.messages[agent.name]='yield'
-        elif action is 'acknowledge':
-            self.messages[agent.name]='acknowledge'
+        elif action is 'try':
+            self.messages[agent.name]='try'
         elif action is '': # NOOP
             pass
         else: # The action was not defined
