@@ -7,6 +7,8 @@ valid_signs     = priority_signs + stop_signs
 class Crossroad(Environment):
     def __init__(self):
         super().__init__()
+        self.order=[]
+        self.messages={}
 
     def __str__(self):
         result='Roads:\n'
@@ -40,7 +42,7 @@ class Crossroad(Environment):
         other_agents=[thing for thing in self.things if (isinstance(thing,Agent) and thing!= agent)]
         roads=[thing for thing in self.things if isinstance(thing,Road)]
         signs=[thing for thing in self.things if isinstance(thing,Sign)]
-        return agent,other_agents,roads,signs
+        return agent,other_agents,roads,signs,self.messages
 
     # If an agent takes the 'go' action it will become inactive
     def execute_action(self,agent,action):
@@ -49,6 +51,10 @@ class Crossroad(Environment):
             agent.alive=False
         elif action is 'wait':
             print (agent.name + ' is waiting')
+        elif action is 'yield':
+            self.messages[agent.name]='yield'
+        elif action is 'acknowledge':
+            self.messages[agent.name]='acknowledge'
         elif action is '': # NOOP
             pass
         else: # The action was not defined

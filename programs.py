@@ -1,10 +1,11 @@
 from common import valid_signs
 
 def program0(percepts):
-    myself=percepts[0]
-    agents=percepts[1]
-    roads=percepts[2]
-    signs=percepts[3]
+    myself      =percepts[0]
+    agents      =percepts[1]
+    roads       =percepts[2]
+    signs       =percepts[3]
+    messages    =percepts[4]
 
 
     my_road=next(road for road in roads if road.name == myself.current_road)
