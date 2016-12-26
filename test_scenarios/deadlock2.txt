@@ -1,0 +1,9 @@
+Road(R1,R2,R3,R4)
+Road(R2,R3,R4,R1)
+Road(R3,R4,R1,R2)
+Road(R4,R1,R2,R3)
+
+Driver(Driver1,R1,R3,false,1)
+Driver(Driver2,R2,R4,false,1)
+Driver(Driver3,R3,R1,false)
+Driver(Driver4,R4,R2,false,0.5)
