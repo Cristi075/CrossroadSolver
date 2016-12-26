@@ -217,5 +217,20 @@ def check(env):
 						print('Expected a stop_right sign on '+str(sign_road.left))
 						return False
 
+	# Print some warnings if they are needed
+	yieldChances=[agent.yieldChance for agent in agents]
+	# If the number of drivers with yieldChance=1 (always yield) is equal to the number of drivers we print a warning
+	# This is a situation where everyone yields everytime
+	if(yieldChances.count(1)==len(agents)): 
+		print('Warning: You set the yieldChance at 1 for every drivers')
+		print('In case of a deadlock every agent will yield and no agent will try to go')
+		print('The environment will be considered valid but a deadlock scenario will not be solved')
+
+	# If there is more than one driver that never yields we print a warning
+	if(yieldChances.count(0)>1):  
+		print('Warning: You set the yieldChance at 0 for multiple drivers')
+		print('In case of a deadlock you will have multiple agents who will never yield')
+		print('The environment will be considered valid but a deadlock scenario will not be solved')
+
 	# If every test passed we return true confirming that the environment is valid
 	return True
