@@ -9,6 +9,7 @@ class Crossroad(Environment):
         super().__init__()
         self.order=[]
         self.messages={}
+        self.deadlock=False # This will become true if the agents found themselves in a deadlock situation
 
     def __str__(self):
         result='Roads:\n'
@@ -49,12 +50,15 @@ class Crossroad(Environment):
         if action is 'go':
             print (agent.name + ' went from ' + agent.current_road + ' to ' + agent.destination_road)
             agent.alive=False
+            self.order.append(agent.name)
         elif action is 'wait':
             print (agent.name + ' is waiting')
         elif action is 'yield':
             self.messages[agent.name]='yield'
+            self.deadlock=True
         elif action is 'try':
             self.messages[agent.name]='try'
+            self.deadlock=True
         elif action is '': # NOOP
             pass
         else: # The action was not defined

@@ -47,6 +47,11 @@ try:
 		env=jsonpickle.decode(inputFile.read())
 		print('Scenario loaded. Running ... '+fileName1)
 		env.run()
+		print('Simulation ended')
+		print('Order:')
+		print(env.order)
+		if(env.deadlock):
+			print('A deadlock occured')
 
 	elif (command == 'parse'):
 		if(len(arguments)!=3):
