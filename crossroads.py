@@ -34,35 +34,71 @@ command=arguments[0]
 
 try:
 	if(command == 'print'):
-		fileName1=arguments[1]
-		print('Trying to open '+fileName1)
-		inputFile=open(fileName1,'r')
+		try:
+			fileName1=arguments[1]
+			print('Trying to open '+fileName1)
+			inputFile=open(fileName1,'r')
+		except:
+			print('Could not open file'+fileName1)
+			exit()
+
 		env=jsonpickle.decode(inputFile.read())
 		print("Loaded scenario from "+fileName1)
 		print(env)
 	elif (command == 'solve'):
-		fileName1=arguments[1]
-		print('Trying to open '+fileName1)
-		inputFile=open(fileName1,'r')
+		try:
+			fileName1=arguments[1]
+			print('Trying to open '+fileName1)
+			inputFile=open(fileName1,'r')
+		except:
+			print('Could not open file'+fileName1)
+			exit()
+
 		env=jsonpickle.decode(inputFile.read())
 		print('Scenario loaded. Running ... '+fileName1)
+
 		env.run()
+		
+		# Creating a file where the order will be written. This file might be useful for automated testing
+		try:
+			resultFile=open('result.txt','w')
+		except:
+			print('Could not create result.txt')
+			exit()
+
 		print('Simulation ended')
 		print('Order:')
 		print(env.order)
 		if(env.deadlock):
+			# If a deadlock occurs i will simply write deadlock since the result is not deterministic in most deadlock cases
+			resultFile.write('Deadlock\n') 
 			print('A deadlock occured')
+		else:
+			for name in env.order:
+				resultFile.write(name)
+				resultFile.write('\n')
+		resultFile.close()
 
 	elif (command == 'parse'):
 		if(len(arguments)!=3):
 			print('Invalid command:'+arguments[0])
 			help()
 
-		fileName1=arguments[1]
-		fileName2=arguments[2]
-		print('Trying to open '+fileName1)
-		inputFile=open(fileName1,'r')
-		outputFile=open(fileName2,'w')
+		try:
+			fileName1=arguments[1]
+			print('Trying to open '+fileName1)
+			inputFile=open(fileName1,'r')
+		except:
+			print('Could not open file'+fileName1)
+			exit()
+
+		try:
+			fileName2=arguments[2]
+			print('Trying to open '+fileName2)
+			outputFile=open(fileName2,'w')
+		except:
+			print('Could not open file'+fileName2)
+			exit()
 
 		parse(inputFile,outputFile)
 	else:
