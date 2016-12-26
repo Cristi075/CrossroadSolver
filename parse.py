@@ -6,25 +6,37 @@ from common import *
 from check import check
 from programs import program0
 
-patternDriver = r'Driver\(([^,]*),([^,]*),([^,]*),([^,]*)\)'
+patternDriver1 = r'Driver\(([^,]*),([^,]*),([^,]*),([^,]*)\)'
+patternDriver2 = r'Driver\(([^,]*),([^,]*),([^,]*),([^,]*),([^,]*)\)'
 patternRoad = r'Road\(([^,]*),([^,]*),([^,]*),([^,]*)\)'
 patternSign = r'Sign\(([^,]*),([^,]*)\)'
 
 def parse(inputFile,outputFile):
 	env=Crossroad()	
 	for line in inputFile.readlines():
-		resDriver 	= re.match(patternDriver,line.strip())
+		resDriver1 	= re.match(patternDriver1,line.strip())
+		resDriver2 	= re.match(patternDriver2,line.strip())
 		resRoad   	= re.match(patternRoad,line.strip())
 		resSign		= re.match(patternSign,line.strip())
-		if(resDriver != None): # This line describes a driver
-			name=resDriver.group(1)
-			current_road=resDriver.group(2)
-			destination_group=resDriver.group(3)
-			if(resDriver.group(4)=='true'):
+		if(resDriver1 != None): # This line describes a default driver (here, default refers to the yieldChance)
+			name=resDriver1.group(1)
+			current_road=resDriver1.group(2)
+			destination_group=resDriver1.group(3)
+			if(resDriver1.group(4)=='true'):
 				emergency=True
 			else:
 				emergency=False
 			env.add_thing(Driver(program0,name,current_road,destination_group,emergency))
+		elif(resDriver2 != None): # This line describes a driver with a predefined yieldChance
+			name=resDriver2.group(1)
+			current_road=resDriver2.group(2)
+			destination_group=resDriver2.group(3)
+			if(resDriver2.group(4)=='true'):
+				emergency=True
+			else:
+				emergency=False
+			yieldChance=float(resDriver2.group(5))
+			env.add_thing(Driver(program0,name,current_road,destination_group,emergency,yieldChance))
 		elif(resRoad != None): # This line describes a road
 			name=resRoad.group(1)
 			leftName=resRoad.group(2).strip()
