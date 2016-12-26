@@ -3,7 +3,7 @@ import re
 import jsonpickle
 
 from common import *
-from generate import check
+from check import check
 from programs import program0
 
 patternDriver = r'Driver\(([^,]*),([^,]*),([^,]*),([^,]*)\)'
