@@ -70,8 +70,12 @@ try:
 		print('Order:')
 		print(env.order)
 		if(env.deadlock):
-			# If a deadlock occurs i will simply write deadlock since the result is not deterministic in most deadlock cases
-			resultFile.write('Deadlock\n') 
+			# A deadlock occured
+			if(env.order==[]):
+				resultFile.write('Fail\n') # The deadlock couldn't be solved
+			else:
+				resultFile.write('Deadlock\n') # The deadlock could be solved
+				# I am not writing the order since it is non-deterministic and I won't expect a pre-determined order in such cases
 			print('A deadlock occured')
 		else:
 			for name in env.order:
