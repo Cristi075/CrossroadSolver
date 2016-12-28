@@ -21,5 +21,5 @@ To run this project you should follow these steps:
 * Copy all the files from the modified folder into the aima folder
 ( by running 'cp modified/* aima/.' )
 ```
-Now you should be able to use the parse command on scenarios described in .txt files (that follow the format described in test_scenarios folder's readme) and use the solve command on the resulted json files to get the result.
+Now you should be able to use the parse command on scenarios described in .txt files (that follow the format described in test_scenarios folder's readme) and use the solve command on the resulted json files to get the result.  
 If you want to run automated tests you can use the parse\_all.sh bash script to parse every \.txt file from the test\_scenaros folder and then you can populate the expected\_results folder with files that follow the described format and run runtest\.py to solve all the json files found in the test\_scenarios folder and compare the result with the one that you wrote in the file with a matching name in the expected\_results folder.

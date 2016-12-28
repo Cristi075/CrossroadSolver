@@ -1,11 +1,12 @@
 # Test scenarios
 
-This folder contains txt files that describe scenarios. The txt files can be turned into json files by using the parse command (and json files can be used as input files for the solve command). The jpg/jpeg/png files are not important for the program and they are here only to help the users see the scenario described in the txt file.  
+This folder contains txt files that describe scenarios. The txt files can be turned into json files by using the parse command (and json files can be used as input files for the solve command).  
+The jpg/jpeg/png files are not important for the program and they are here only to help the users see the scenario described in the txt file.  
   
 ## Format
 The syntax for writing your own scenarios will be explained in this section.
 ### Describing roads
-A road has an unique name and three lists of roads it is connected to (one for each direction: left, forward and right).
+A road has an unique name and three lists of roads it is connected to (one for each direction: left, forward and right).  
 Since for this project we are dealing only with T-shaped and cross-shaped crossroads it is safe to assume that for each dirrection there is either a single road connected or nothing. 
 To describe a road you should use the following syntax:
 ```
@@ -13,8 +14,8 @@ To describe a road you should use the following syntax:
 ```
 name should be a unique to each road
 left\_name, forward\_name  and right\_name should be names of other roads.  
-If a road doesn't have a certain connection you should put a whitespace instead of a name.
-If you use an invalid name and use the parse command you should receive an error.
+If a road doesn't have a certain connection you should put a whitespace instead of a name.  
+If you use an invalid name and use the parse command you should receive an error.  
 **Examples:**
 ```
     Road(R1,R2,R3,R4)
@@ -44,7 +45,7 @@ The second method involves manually specifying the yieldChance
 ```
     Driver(name,current_road,destination_road,emergency,yieldChance)
 ```
-Another limitation of this project is that you cannot place more than one driver on the same starting road (however, same destination road for multiple drivers is an allowed case).
+Another limitation of this project is that you cannot place more than one driver on the same starting road (however, same destination road for multiple drivers is an allowed case).  
 **Examples**
 ```
     Driver(Green Car,R1,R3,false)
