@@ -1,11 +1,17 @@
 # Script used for automated testing
 import os
 import subprocess
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 
 devNull = open(os.devnull, 'w')
 count=1
 correct=0
 deadlock=0
+
+labels=['Correct','Wrong','Deadlock']
+colors=['Green','Red','Magenta']
 
 for file in os.listdir('test_scenarios'):
 	if file.endswith('.json'):
@@ -51,3 +57,7 @@ print(str(count-1)+' tests were ran')
 print(str(correct)+' tests were sucesfull')
 print(str(deadlock) + ' deadlocks were present in the scenarios and they were properly detected')
 print(str(count-1-correct-deadlock)+' tests failed')
+
+sizes=[correct,count-1-correct-deadlock,deadlock]
+plt.pie(sizes,labels=labels,colors=colors)
+plt.savefig('plot.png')
