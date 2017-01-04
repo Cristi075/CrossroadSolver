@@ -45,11 +45,6 @@ def program0(percepts):
 
     myself.memory['active_agents'] = nr_active_agents
 
-    # If my vehicle is an emergency one i should go without waiting
-    # TODO: What happens if we have more than one emergency vehicle
-    if myself.emergency: 
-        return 'go'
-
     # If there are emergency vehicles present i should wait for them to pass  
     if not myself.emergency and emergency_agents:
         print(myself.name+': I am waiting for the emergency vehicles to pass')
@@ -120,6 +115,10 @@ def program0(percepts):
         waitFor = [ a for a in agents if a.current_road in my_road.right]
     elif sign.name=='priority_road_left': # I don't have to wait for anyone
         return 'go'
+
+    # If my vehicle is an emergency one i should wait only for other emergency vehicles
+    if myself.emergency: 
+        waitFor=[agent for agent in waitFor if agent.emergency]
 
     for agent in waitFor:
             if agent.alive:
