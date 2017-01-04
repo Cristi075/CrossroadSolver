@@ -1,0 +1,10 @@
+Road(R1,R2,R3,R4)
+Road(R2,R3,R4,R1)
+Road(R3,R4,R1,R2)
+Road(R4,R1,R2,R3)
+
+Driver(Red Car,R1,R2,false)
+Driver(Black Car,R3,R4,false)
+
+Sign(stop,R1)
+Sign(stop,R3)

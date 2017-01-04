@@ -1,0 +1,13 @@
+Road(R1,R2,R3,R4)
+Road(R2,R3,R4,R1)
+Road(R3,R4,R1,R2)
+Road(R4,R1,R2,R3)
+
+Driver(Blue car,R3,R1,false)
+Driver(Purple Truck,R2,R3,false)
+Driver(Orange Bus,R4,R1,false)
+
+Sign(priority_road_right,R1)
+Sign(priority_road_left,R4)
+Sign(stop_left,R2)
+Sign(stop_right,R3)
