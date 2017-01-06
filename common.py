@@ -26,14 +26,6 @@ class Crossroad(Environment):
             result= result + str(sign) + '\n'
         return result
 
-    # Returns the road the road with the given name if it exists
-    def getRoadByName(self,name):
-        roads=[thing for thing in self.things if isinstance(thing,Road)]
-        for road in roads:
-            if road.name is name:
-                return road
-        return None
-
     # An agent will receive a list with differnet elements from the environment
     # The first element will be the agent itself
     # The second element will be a list containing other agents
